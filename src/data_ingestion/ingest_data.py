@@ -22,6 +22,10 @@ class ZipDataIngestor(DataIngestor):
         else:
             target_dir = os.path.join(parent_dir, "extracted_data")
 
+        # Ensure the data folder is created inside 'src'
+        if not target_dir.replace("\\", "/").startswith("src"):
+            target_dir = os.path.join("src", target_dir.lstrip(".\\/"))
+
         os.makedirs(target_dir, exist_ok=True)
 
         dataframes = {}
